@@ -9,6 +9,9 @@ export function ApiStack({ stack }: StackContext) {
             authorizer: "iam",
             function: {
                 bind: [table],
+                environment: {
+                    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY || 'not found',
+                },
             },
         },
         routes: {
