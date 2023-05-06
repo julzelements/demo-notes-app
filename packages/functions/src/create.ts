@@ -8,7 +8,9 @@ export const main = handler(async(event: any) => {
     const params = {
         TableName: Table.Notes.tableName,
         Item: {
-            userId: "123",
+            // Federated Identity id (Identity Pool user id) (could be facebook id?)
+            // Not the id from the user pool.
+            userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId,
             noteId: uuid.v1(),
             content: data.content,
             attachment: data.attachment,
