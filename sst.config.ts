@@ -10,6 +10,11 @@ export default {
     };
   },
   stacks(app) {
-    app.stack(StorageStack).stack(ApiStack)
+    if (app.stage !== "prod") {
+      app.setDefaultRemovalPolicy("destroy");
+    }
+    app
+    .stack(StorageStack)
+    .stack(ApiStack)
   }
 } satisfies SSTConfig;
